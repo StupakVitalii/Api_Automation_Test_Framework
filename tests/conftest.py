@@ -1,3 +1,5 @@
+import os
+
 import pytest
 import requests
 import json
@@ -5,8 +7,7 @@ import random
 
 
 @pytest.fixture(scope='module')
-def sign_up_response():
-    url = "https://qauto.forstudy.space/api/auth/signup"
+def sign_up_response(url):
     payload = json.dumps({
         "name": "John",
         "lastName": "Dou",
@@ -17,8 +18,10 @@ def sign_up_response():
     headers = {
         'Content-Type': 'application/json'
     }
-    response = requests.request("POST", url, headers=headers, data=payload, timeout=5)
+    response = requests.request("POST", f"{url}/auth/signup", headers=headers, data=payload, timeout=5)
     return response
 
 
-
+@pytest.fixture(scope='session')
+def url():
+    return os.environ['BASE_URL']
