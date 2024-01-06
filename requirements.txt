@@ -4,3 +4,4 @@ platformdirs==4.1.0
 virtualenv==20.25.0
 requests==2.31.0
 pytest==7.4.3
+allure-pytest==2.13.2
