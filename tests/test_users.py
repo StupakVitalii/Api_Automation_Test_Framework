@@ -1,8 +1,6 @@
 import random
 import json
-
 from src.services import UserApiService
-
 user_api = UserApiService()
 
 
