@@ -69,10 +69,6 @@ class CarApiService(ApiService):
     def create_new_car(self, body, headers):
         return self._post(endpoint="/cars", body=body, headers=headers)
 
-    # def created_car_id(self):
-    #     yup = self.create_new_car(body, headers).json()
-    #     yup_1 = yup['data']['id']
-    #     return yup_1
     @allure.step
     def get_car_brand(self, headers):
         return self._get(endpoint="/cars/brands", headers=headers)
