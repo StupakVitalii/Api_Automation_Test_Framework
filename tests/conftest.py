@@ -5,7 +5,7 @@ import json
 import random
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope='session')
 def sign_up_response(url):
     payload = json.dumps({
         "name": "John",
@@ -19,6 +19,11 @@ def sign_up_response(url):
     }
     response = requests.request("POST", f"{url}/auth/signup", headers=headers, data=payload, timeout=5)
     return response
+
+
+@pytest.fixture(scope='session')
+def headers(sign_up_response):
+    return {'Cookie': f'sid={sign_up_response.cookies.get("sid")}'}
 
 
 @pytest.fixture(scope='session')
