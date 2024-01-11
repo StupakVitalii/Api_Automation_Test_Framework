@@ -98,3 +98,28 @@ class CarApiService(ApiService):
     @allure.step
     def delete_existing_car(self, headers, created_car_id):
         return AssertableResponse(self._delete(endpoint=f"/cars/{created_car_id}", headers=headers))
+
+
+class ExpensesApiService(ApiService):
+    def __init__(self):
+        super().__init__()
+
+    @allure.step
+    def get_all_expenses(self, headers):
+        return AssertableResponse(self._get(endpoint="/expenses", headers=headers))
+
+    @allure.step
+    def create_an_expense(self, headers, body):
+        return AssertableResponse(self._post(endpoint="/expenses", body=body, headers=headers))
+
+    @allure.step
+    def get_an_expense_by_id(self, headers, expense_ids):
+        return AssertableResponse(self._get(endpoint=f"/expenses/{expense_ids}", headers=headers))
+
+    @allure.step
+    def edit_an_expense(self, headers, body, expense_ids):
+        return AssertableResponse(self._put(endpoint=f"/expenses/{expense_ids}", body=body, headers=headers))
+
+    @allure.step
+    def removes_an_expense(self, headers, expense_ids):
+        return AssertableResponse(self._delete(endpoint=f"/expenses/{expense_ids}", headers=headers))
