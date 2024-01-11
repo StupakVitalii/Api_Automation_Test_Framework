@@ -4,7 +4,6 @@ import requests
 import json
 import random
 
-
 @pytest.fixture(scope='session')
 def sign_up_response(url):
     payload = json.dumps({
