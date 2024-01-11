@@ -2,7 +2,7 @@ import random
 import json
 import datetime
 import pytest
-from api_test_autoamtion_framework.src.services import ExpensesApiService
+from src.services import ExpensesApiService
 
 expense_api = ExpensesApiService()
 
@@ -19,7 +19,6 @@ def create_expense_id(sign_up_response, headers):
         "totalCost": 11,
         "forceMileage": False
     }
-    headers['Content-Type'] = 'application/json'
     response = expense_api.create_an_expense(body=json.dumps(payload), headers=headers)
     expense_id = response.get_field('data')['id']
     return expense_id
@@ -38,7 +37,6 @@ def test_create_an_expense(sign_up_response, headers):
         "totalCost": total,
         "forceMileage": False
     }
-    headers['Content-Type'] = 'application/json'
     response = expense_api.create_an_expense(body=json.dumps(payload), headers=headers)
     assert response.is_status_code(200)
     assert response.get_field('status') == 'ok'
@@ -74,7 +72,6 @@ def test_edit_expense(sign_up_response, headers, create_expense_id):
         "totalCost": total,
         "forceMileage": False
     }
-    headers['Content-Type'] = 'application/json'
     response = expense_api.edit_an_expense(body=json.dumps(payload), headers=headers, expense_ids=create_expense_id)
     assert response.is_status_code(200)
     assert response.get_field('status') == 'ok'

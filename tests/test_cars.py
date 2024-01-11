@@ -14,7 +14,6 @@ def car_id(sign_up_response, headers):
         "carModelId": 1,
         "mileage": 1
     })
-    headers['Content-Type'] = 'application/json'
     response = car_api.create_new_car(body=payload, headers=headers)
     return response.get_field('data')['id']
 
@@ -25,7 +24,6 @@ def test_create_new_car(sign_up_response, headers):
         "carModelId": 1,
         "mileage": 1
     })
-    headers['Content-Type'] = 'application/json'
     response = car_api.create_new_car(body=payload, headers=headers)
 
     assert response.is_status_code(201)
@@ -78,7 +76,6 @@ def test_edit_existing_car(sign_up_response, headers, car_id):
         "carModelId": 6,
         "mileage": 168223
     })
-    headers['Content-Type'] = 'application/json'
     response = car_api.edit_existing_car(body=payload, headers=headers, created_car_id=car_id)
 
     assert response.is_status_code(200)

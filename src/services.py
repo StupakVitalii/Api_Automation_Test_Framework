@@ -16,10 +16,12 @@ class ApiService(object):
 
     @allure.step('POST: {endpoint}')
     def _post(self, endpoint, body, headers):
+        headers['Content-Type'] = 'application/json'
         return requests.post(f"{self._base_url}{endpoint}", data=body, headers=headers)
 
     @allure.step('PUT: {endpoint}')
     def _put(self, endpoint, body, headers):
+        headers['Content-Type'] = 'application/json'
         return requests.put(f"{self._base_url}{endpoint}", data=body, headers=headers)
 
     @allure.step('DELETE: {endpoint}')
