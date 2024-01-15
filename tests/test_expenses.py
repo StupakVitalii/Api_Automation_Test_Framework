@@ -7,7 +7,7 @@ from src.services import ExpensesApiService
 expense_api = ExpensesApiService()
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='module')
 def create_expense_id(sign_up_response, headers, car_id):
     current_timestamp = datetime.datetime.now().isoformat()
     mileage = random.randint(1, 13)

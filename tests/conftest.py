@@ -4,7 +4,7 @@ import requests
 import json
 import random
 
-from tests.test_cars import car_api
+from src.services import CarApiService
 
 
 @pytest.fixture(scope='session')
@@ -33,12 +33,12 @@ def url():
     return os.environ['BASE_URL']
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='module')
 def car_id(sign_up_response, headers):
     payload = json.dumps({
         "carBrandId": 1,
         "carModelId": 1,
         "mileage": 1
     })
-    response = car_api.create_new_car(body=payload, headers=headers)
+    response = CarApiService().create_new_car(body=payload, headers=headers)
     return response.get_field('data')['id']
