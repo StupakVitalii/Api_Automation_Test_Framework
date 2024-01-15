@@ -7,12 +7,12 @@ from src.services import ExpensesApiService
 expense_api = ExpensesApiService()
 
 
-@pytest.fixture()
-def create_expense_id(sign_up_response, headers):
+@pytest.fixture(scope='session')
+def create_expense_id(sign_up_response, headers, car_id):
     current_timestamp = datetime.datetime.now().isoformat()
-    mileage = random.randint(1, 1000)
+    mileage = random.randint(1, 13)
     payload = {
-        "carId": 82291,
+        "carId": car_id,
         "reportedAt": current_timestamp,
         "mileage": mileage,
         "liters": 11,
@@ -24,13 +24,13 @@ def create_expense_id(sign_up_response, headers):
     return expense_id
 
 
-def test_create_an_expense(sign_up_response, headers):
+def test_create_an_expense(sign_up_response, headers, car_id):
     current_timestamp = datetime.datetime.now().isoformat()
-    mileage = random.randint(13, 2100)
+    mileage = random.randint(13, 210)
     liters = random.randint(15, 75)
     total = liters * 3
     payload = {
-        "carId": 82291,
+        "carId": car_id,
         "reportedAt": current_timestamp,
         "mileage": mileage,
         "liters": liters,
@@ -59,13 +59,13 @@ def test_get_expense_by_id(sign_up_response, headers, create_expense_id):
     assert response.get_field('status') == 'ok'
 
 
-def test_edit_expense(sign_up_response, headers, create_expense_id):
+def test_edit_expense(sign_up_response, headers, car_id, create_expense_id):
     current_timestamp = datetime.datetime.now().isoformat()
-    mileage = random.randint(13, 2100)
+    mileage = random.randint(211, 2100)
     liters = random.randint(15, 75)
     total = liters * 3
     payload = {
-        "carId": 82291,
+        "carId": car_id,
         "reportedAt": current_timestamp,
         "mileage": mileage,
         "liters": liters,

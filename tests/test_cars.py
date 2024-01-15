@@ -7,15 +7,7 @@ from src.services import CarApiService
 car_api = CarApiService()
 
 
-@pytest.fixture()
-def car_id(sign_up_response, headers):
-    payload = json.dumps({
-        "carBrandId": 1,
-        "carModelId": 1,
-        "mileage": 1
-    })
-    response = car_api.create_new_car(body=payload, headers=headers)
-    return response.get_field('data')['id']
+
 
 
 def test_create_new_car(sign_up_response, headers):
