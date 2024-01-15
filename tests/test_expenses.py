@@ -10,7 +10,7 @@ expense_api = ExpensesApiService()
 @pytest.fixture(scope='module')
 def create_expense_id(sign_up_response, headers, car_id):
     current_timestamp = datetime.datetime.now().isoformat()
-    mileage = random.randint(1, 13)
+    mileage = random.randint(2, 13)
     payload = {
         "carId": car_id,
         "reportedAt": current_timestamp,
@@ -26,7 +26,7 @@ def create_expense_id(sign_up_response, headers, car_id):
 
 def test_create_an_expense(sign_up_response, headers, car_id):
     current_timestamp = datetime.datetime.now().isoformat()
-    mileage = random.randint(13, 210)
+    mileage = random.randint(14, 210)
     liters = random.randint(15, 75)
     total = liters * 3
     payload = {
